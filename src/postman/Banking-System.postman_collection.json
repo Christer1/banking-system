@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "2f158024-d5a3-434a-a80c-6af6562ac002",
+		"name": "Banking-System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15560873"
+	},
+	"item": [
+		{
+			"name": "Testing",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"toAccountId\": \"6669bbf9c0b7cd234714b214\",\n  \"amount\": 250\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
