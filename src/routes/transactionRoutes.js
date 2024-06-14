@@ -4,107 +4,101 @@ const BankAccount = require('../models/bankAccount');
 const Transaction = require('../models/transaction');
 
 // Fetch all transactions for an account
-router.get('/accounts/:id/transactions', async (req, res) => {
+router.get('/:id/transactions', async (req, res) => {
   try {
-    const account = await BankAccount.findById(req.params.id);
-    if (!account) return res.status(404).json({ message: 'Account not found' });
-
-    res.json(account.transactions);
+    const account = await BankAccount.findById(req.params.id).populate('transactions');
+    if (!account) {
+      return res.status(404).json({ error: 'Account not found' });
+    }
+    res.status(200).json(account.transactions);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Deposit money
-router.post('/accounts/:id/deposit', async (req, res) => {
+// Deposit money into an account
+router.post('/:id/deposit', async (req, res) => {
+  const { amount } = req.body;
+
   try {
     const account = await BankAccount.findById(req.params.id);
-    if (!account) return res.status(404).json({ message: 'Account not found' });
+    if (!account) {
+      return res.status(404).json({ error: 'Account not found' });
+    }
 
-    const transaction = new Transaction({
-      type: 'deposit',
-      amount: req.body.amount,
-      timestamp: new Date()
-    });
-
+    account.balance += amount;
+    const transaction = new Transaction({ type: 'deposit', amount });
     account.transactions.push(transaction);
-    account.balance += req.body.amount;
 
+    await transaction.save();
     await account.save();
-    res.status(201).json(account);
+
+    res.status(200).json(account);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Withdraw money
-router.post('/accounts/:id/withdraw', async (req, res) => {
+// Withdraw money from an account
+router.post('/:id/withdraw', async (req, res) => {
+  const { amount } = req.body;
+
   try {
     const account = await BankAccount.findById(req.params.id);
-    if (!account) return res.status(404).json({ message: 'Account not found' });
-
-    if (account.balance < req.body.amount) {
-      return res.status(400).json({ message: 'Insufficient balance' });
+    if (!account) {
+      return res.status(404).json({ error: 'Account not found' });
     }
 
-    const transaction = new Transaction({
-      type: 'withdrawal',
-      amount: req.body.amount,
-      timestamp: new Date()
-    });
+    if (account.balance < amount) {
+      return res.status(400).json({ error: 'Insufficient funds' });
+    }
 
+    account.balance -= amount;
+    const transaction = new Transaction({ type: 'withdrawal', amount });
     account.transactions.push(transaction);
-    account.balance -= req.body.amount;
 
+    await transaction.save();
     await account.save();
-    res.status(201).json(account);
+
+    res.status(200).json(account);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Transfer between accounts
-router.post('/accounts/:id/transfer', async (req, res) => {
+// Transfer money between accounts
+router.post('/:id/transfer', async (req, res) => {
+  const { toAccountId, amount } = req.body;
+
   try {
-    const sourceAccount = await BankAccount.findById(req.params.id);
-    const targetAccount = await BankAccount.findById(req.body.toAccountId);
+    const fromAccount = await BankAccount.findById(req.params.id);
+    const toAccount = await BankAccount.findById(toAccountId);
 
-    if (!sourceAccount) {
-      return res.status(404).json({ message: 'Source account not found' });
+    if (!fromAccount || !toAccount) {
+      return res.status(404).json({ error: 'One or both accounts not found' });
     }
 
-    if (!targetAccount) {
-      return res.status(404).json({ message: 'Target account not found' });
+    if (fromAccount.balance < amount) {
+      return res.status(400).json({ error: 'Insufficient funds' });
     }
 
-    if (sourceAccount.balance < req.body.amount) {
-      return res.status(400).json({ message: 'Insufficient balance' });
-    }
+    fromAccount.balance -= amount;
+    toAccount.balance += amount;
 
-    const withdrawal = new Transaction({
-      type: 'withdrawal',
-      amount: req.body.amount,
-      timestamp: new Date()
-    });
+    const withdrawal = new Transaction({ type: 'withdrawal', amount });
+    const deposit = new Transaction({ type: 'deposit', amount });
 
-    const deposit = new Transaction({
-      type: 'deposit',
-      amount: req.body.amount,
-      timestamp: new Date()
-    });
+    fromAccount.transactions.push(withdrawal);
+    toAccount.transactions.push(deposit);
 
-    sourceAccount.transactions.push(withdrawal);
-    sourceAccount.balance -= req.body.amount;
+    await withdrawal.save();
+    await deposit.save();
+    await fromAccount.save();
+    await toAccount.save();
 
-    targetAccount.transactions.push(deposit);
-    targetAccount.balance += req.body.amount;
-
-    await sourceAccount.save();
-    await targetAccount.save();
-
-    res.status(201).json({ sourceAccount, targetAccount });
+    res.status(200).json({ fromAccount, toAccount });
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

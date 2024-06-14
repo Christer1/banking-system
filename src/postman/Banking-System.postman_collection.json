@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"accountNumber\": 2321324495,\n  \"firstName\": \"Olawale\",\n  \"lastName\": \"Yussuph\"\n}",
+					"raw": "{\n  \"firstName\": \"New\",\n  \"lastName\": \"Account\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,13 +37,77 @@
 			},
 			"response": [
 				{
+					"name": "Failed response for create account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Olawale\",\n  \"lastName\": \"Yussuph\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"35-P2gWwhmQ0NvTnH/6/t1h3HdWFjU\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 13:11:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"An account with this name already exists.\"\n}"
+				},
+				{
 					"name": "Sample response for create account",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accountNumber\": 2321324495,\n  \"firstName\": \"Olawale\",\n  \"lastName\": \"Yussuph\"\n}",
+							"raw": "{\n  \"firstName\": \"New\",\n  \"lastName\": \"Account\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,15 +142,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "142"
+							"value": "167"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"8e-GrcK5GwYsAb7HCEJTmKXSfLSzBc\""
+							"value": "W/\"a7-jjSbYJPfBpTR5tbhDXZM8VQ74zs\""
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 14 Jun 2024 08:11:14 GMT"
+							"value": "Fri, 14 Jun 2024 13:12:35 GMT"
 						},
 						{
 							"key": "Connection",
@@ -98,7 +162,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"accountNumber\": 2321324495,\n    \"firstName\": \"Olawale\",\n    \"lastName\": \"Yussuph\",\n    \"balance\": 0,\n    \"_id\": \"666bfb22c0b7cd234714b25a\",\n    \"transactions\": [],\n    \"__v\": 0\n}"
+					"body": "{\n    \"firstName\": \"New\",\n    \"lastName\": \"Account\",\n    \"balance\": 0,\n    \"transactions\": [],\n    \"_id\": \"666c41c3e0894133fbcbe05a\",\n    \"accountHolder\": \"New Account\",\n    \"accountNumber\": 123456791,\n    \"__v\": 0\n}"
 				}
 			]
 		},
