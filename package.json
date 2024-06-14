@@ -1,0 +1,16 @@
+{
+  "name": "banking-system",
+  "version": "1.0.0",
+  "description": "<h2>Bank Simulation Project</h2>  <h3>Overview</h3> <p>This project is a simulation of a bank account system built with Node.js, Express.js, and MongoDB. Users can create accounts, deposit and withdraw money, view transaction histories, and transfer money between accounts. The project also includes a daily withdrawal limit feature. The application is dockerized for easy deployment and testing. </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
+}
