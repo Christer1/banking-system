@@ -2,21 +2,19 @@
 	"info": {
 		"_postman_id": "2f158024-d5a3-434a-a80c-6af6562ac002",
 		"name": "Banking-System",
+		"description": "#### Overview\n\nThis Postman collection is designed to facilitate the testing and demonstration of the Bank Simulation API. The collection includes a series of endpoints that cover the core functionalities of the simulated banking system, such as account creation, deposits, withdrawals, transfers, and transaction retrievals.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15560873"
 	},
 	"item": [
 		{
-			"name": "Testing",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Create account",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"toAccountId\": \"6669bbf9c0b7cd234714b214\",\n  \"amount\": 250\n}",
+					"raw": "{\n  \"accountNumber\": 2321324495,\n  \"firstName\": \"Olawale\",\n  \"lastName\": \"Yussuph\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,7 +35,782 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample response for create account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountNumber\": 2321324495,\n  \"firstName\": \"Olawale\",\n  \"lastName\": \"Yussuph\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "142"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8e-GrcK5GwYsAb7HCEJTmKXSfLSzBc\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:11:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"accountNumber\": 2321324495,\n    \"firstName\": \"Olawale\",\n    \"lastName\": \"Yussuph\",\n    \"balance\": 0,\n    \"_id\": \"666bfb22c0b7cd234714b25a\",\n    \"transactions\": [],\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Fetch all Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for fetch all accounts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1275"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4fb-XuNn/6AVQ7R+CVwmxkI4aWJyrlY\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:16:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"6669bbf9c0b7cd234714b214\",\n        \"accountNumber\": 123456789,\n        \"firstName\": \"Olawale\",\n        \"lastName\": \"Yussuph\",\n        \"balance\": 2050,\n        \"transactions\": [\n            {\n                \"type\": \"deposit\",\n                \"amount\": 2000,\n                \"timestamp\": \"2024-06-12T15:18:11.789Z\",\n                \"_id\": \"6669bc33c0b7cd234714b21b\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 200,\n                \"timestamp\": \"2024-06-12T15:18:35.884Z\",\n                \"_id\": \"6669bc4bc0b7cd234714b220\"\n            },\n            {\n                \"type\": \"deposit\",\n                \"amount\": 250,\n                \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n                \"_id\": \"6669bd07c0b7cd234714b23e\"\n            }\n        ],\n        \"__v\": 3\n    },\n    {\n        \"_id\": \"6669bc0ac0b7cd234714b217\",\n        \"accountNumber\": 123456789,\n        \"firstName\": \"Tester\",\n        \"lastName\": \"Ola\",\n        \"balance\": 2650,\n        \"transactions\": [\n            {\n                \"type\": \"deposit\",\n                \"amount\": 3200,\n                \"timestamp\": \"2024-06-12T15:19:17.298Z\",\n                \"_id\": \"6669bc75c0b7cd234714b227\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 300,\n                \"timestamp\": \"2024-06-12T15:19:46.403Z\",\n                \"_id\": \"6669bc92c0b7cd234714b22c\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 250,\n                \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n                \"_id\": \"6669bd07c0b7cd234714b23d\"\n            }\n        ],\n        \"__v\": 3\n    },\n    {\n        \"_id\": \"6669bd13c0b7cd234714b243\",\n        \"balance\": 0,\n        \"transactions\": [],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"666bfb22c0b7cd234714b25a\",\n        \"accountNumber\": 2321324495,\n        \"firstName\": \"Olawale\",\n        \"lastName\": \"Yussuph\",\n        \"balance\": 0,\n        \"transactions\": [],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"666bfc3fc0b7cd234714b25c\",\n        \"accountNumber\": 38289434793,\n        \"firstName\": \"Second\",\n        \"lastName\": \"user\",\n        \"balance\": 0,\n        \"transactions\": [],\n        \"__v\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Fetch Single Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bbf9c0b7cd234714b214",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample request for fetch single account",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bbf9c0b7cd234714b214",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "459"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1cb-duZsJQmG9nxvl0m2D/SK930BtBI\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:19:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6669bbf9c0b7cd234714b214\",\n    \"accountNumber\": 123456789,\n    \"firstName\": \"Olawale\",\n    \"lastName\": \"Yussuph\",\n    \"balance\": 2050,\n    \"transactions\": [\n        {\n            \"type\": \"deposit\",\n            \"amount\": 2000,\n            \"timestamp\": \"2024-06-12T15:18:11.789Z\",\n            \"_id\": \"6669bc33c0b7cd234714b21b\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 200,\n            \"timestamp\": \"2024-06-12T15:18:35.884Z\",\n            \"_id\": \"6669bc4bc0b7cd234714b220\"\n        },\n        {\n            \"type\": \"deposit\",\n            \"amount\": 250,\n            \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n            \"_id\": \"6669bd07c0b7cd234714b23e\"\n        }\n    ],\n    \"__v\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/666bfc3fc0b7cd234714b25c/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"666bfc3fc0b7cd234714b25c",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for delete account",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/666bfc3fc0b7cd234714b25c/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"666bfc3fc0b7cd234714b25c",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d-GcRCen0YoLBrqzkR3WqZSrBLqbA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:23:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Account deleted\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Olawale2\",\n  \"lastName\": \"Yussuph2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bbf9c0b7cd234714b214",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for update account",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Olawale2\",\n  \"lastName\": \"Yussuph2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bbf9c0b7cd234714b214",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "461"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1cd-re3TdI+8tP97yNa1PJj3ph1x7F0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:27:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6669bbf9c0b7cd234714b214\",\n    \"accountNumber\": 123456789,\n    \"firstName\": \"Olawale2\",\n    \"lastName\": \"Yussuph2\",\n    \"balance\": 2050,\n    \"transactions\": [\n        {\n            \"type\": \"deposit\",\n            \"amount\": 2000,\n            \"timestamp\": \"2024-06-12T15:18:11.789Z\",\n            \"_id\": \"6669bc33c0b7cd234714b21b\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 200,\n            \"timestamp\": \"2024-06-12T15:18:35.884Z\",\n            \"_id\": \"6669bc4bc0b7cd234714b220\"\n        },\n        {\n            \"type\": \"deposit\",\n            \"amount\": 250,\n            \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n            \"_id\": \"6669bd07c0b7cd234714b23e\"\n        }\n    ],\n    \"__v\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "Fetch all transactions for an account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/transactions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bbf9c0b7cd234714b214",
+						"transactions",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for fetch all transaction for an account",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bbf9c0b7cd234714b214/transactions/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bbf9c0b7cd234714b214",
+								"transactions",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "317"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13d-/qYejmDuyzTbrcagK26/lC9pcQ0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:29:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"type\": \"deposit\",\n        \"amount\": 2000,\n        \"timestamp\": \"2024-06-12T15:18:11.789Z\",\n        \"_id\": \"6669bc33c0b7cd234714b21b\"\n    },\n    {\n        \"type\": \"withdrawal\",\n        \"amount\": 200,\n        \"timestamp\": \"2024-06-12T15:18:35.884Z\",\n        \"_id\": \"6669bc4bc0b7cd234714b220\"\n    },\n    {\n        \"type\": \"deposit\",\n        \"amount\": 250,\n        \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n        \"_id\": \"6669bd07c0b7cd234714b23e\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Deposit Money",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 2000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/deposit/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bc0ac0b7cd234714b217",
+						"deposit",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for deposit money",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/deposit/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bc0ac0b7cd234714b217",
+								"deposit",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "562"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"232-2fwd/pj3vLDgMzR4eD+Zx6Hyylc\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:33:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6669bc0ac0b7cd234714b217\",\n    \"accountNumber\": 123456789,\n    \"firstName\": \"Tester\",\n    \"lastName\": \"Ola\",\n    \"balance\": 4650,\n    \"transactions\": [\n        {\n            \"type\": \"deposit\",\n            \"amount\": 3200,\n            \"timestamp\": \"2024-06-12T15:19:17.298Z\",\n            \"_id\": \"6669bc75c0b7cd234714b227\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 300,\n            \"timestamp\": \"2024-06-12T15:19:46.403Z\",\n            \"_id\": \"6669bc92c0b7cd234714b22c\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 250,\n            \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n            \"_id\": \"6669bd07c0b7cd234714b23d\"\n        },\n        {\n            \"type\": \"deposit\",\n            \"amount\": 2000,\n            \"timestamp\": \"2024-06-14T08:33:10.959Z\",\n            \"_id\": \"666c0046c0b7cd234714b276\"\n        }\n    ],\n    \"__v\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Withdraw Money",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1500\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/withdraw/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bc0ac0b7cd234714b217",
+						"withdraw",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for withdraw money",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/withdraw/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bc0ac0b7cd234714b217",
+								"withdraw",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "670"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29e-nG44Jyi2xBq3m4aRdoHbb66C300\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:34:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6669bc0ac0b7cd234714b217\",\n    \"accountNumber\": 123456789,\n    \"firstName\": \"Tester\",\n    \"lastName\": \"Ola\",\n    \"balance\": 3150,\n    \"transactions\": [\n        {\n            \"type\": \"deposit\",\n            \"amount\": 3200,\n            \"timestamp\": \"2024-06-12T15:19:17.298Z\",\n            \"_id\": \"6669bc75c0b7cd234714b227\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 300,\n            \"timestamp\": \"2024-06-12T15:19:46.403Z\",\n            \"_id\": \"6669bc92c0b7cd234714b22c\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 250,\n            \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n            \"_id\": \"6669bd07c0b7cd234714b23d\"\n        },\n        {\n            \"type\": \"deposit\",\n            \"amount\": 2000,\n            \"timestamp\": \"2024-06-14T08:33:10.959Z\",\n            \"_id\": \"666c0046c0b7cd234714b276\"\n        },\n        {\n            \"type\": \"withdrawal\",\n            \"amount\": 1500,\n            \"timestamp\": \"2024-06-14T08:34:34.323Z\",\n            \"_id\": \"666c009ac0b7cd234714b27e\"\n        }\n    ],\n    \"__v\": 5\n}"
+				}
+			]
+		},
+		{
+			"name": "Transfer: Account  to Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"toAccountId\": \"6669bbf9c0b7cd234714b214\",\n  \"amount\": 300\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/transfer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"6669bc0ac0b7cd234714b217",
+						"transfer",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample response for Transfer: Account  to Account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"toAccountId\": \"6669bbf9c0b7cd234714b214\",\n  \"amount\": 300\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/accounts/6669bc0ac0b7cd234714b217/transfer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"accounts",
+								"6669bc0ac0b7cd234714b217",
+								"transfer",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1377"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"561-2s5XHKYpCKnGuwlataVoniTnAZo\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Jun 2024 08:36:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"sourceAccount\": {\n        \"_id\": \"6669bc0ac0b7cd234714b217\",\n        \"accountNumber\": 123456789,\n        \"firstName\": \"Tester\",\n        \"lastName\": \"Ola\",\n        \"balance\": 2850,\n        \"transactions\": [\n            {\n                \"type\": \"deposit\",\n                \"amount\": 3200,\n                \"timestamp\": \"2024-06-12T15:19:17.298Z\",\n                \"_id\": \"6669bc75c0b7cd234714b227\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 300,\n                \"timestamp\": \"2024-06-12T15:19:46.403Z\",\n                \"_id\": \"6669bc92c0b7cd234714b22c\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 250,\n                \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n                \"_id\": \"6669bd07c0b7cd234714b23d\"\n            },\n            {\n                \"type\": \"deposit\",\n                \"amount\": 2000,\n                \"timestamp\": \"2024-06-14T08:33:10.959Z\",\n                \"_id\": \"666c0046c0b7cd234714b276\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 1500,\n                \"timestamp\": \"2024-06-14T08:34:34.323Z\",\n                \"_id\": \"666c009ac0b7cd234714b27e\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 300,\n                \"timestamp\": \"2024-06-14T08:36:54.089Z\",\n                \"_id\": \"666c0126c0b7cd234714b28b\"\n            }\n        ],\n        \"__v\": 6\n    },\n    \"targetAccount\": {\n        \"_id\": \"6669bbf9c0b7cd234714b214\",\n        \"accountNumber\": 123456789,\n        \"firstName\": \"Olawale2\",\n        \"lastName\": \"Yussuph2\",\n        \"balance\": 2350,\n        \"transactions\": [\n            {\n                \"type\": \"deposit\",\n                \"amount\": 2000,\n                \"timestamp\": \"2024-06-12T15:18:11.789Z\",\n                \"_id\": \"6669bc33c0b7cd234714b21b\"\n            },\n            {\n                \"type\": \"withdrawal\",\n                \"amount\": 200,\n                \"timestamp\": \"2024-06-12T15:18:35.884Z\",\n                \"_id\": \"6669bc4bc0b7cd234714b220\"\n            },\n            {\n                \"type\": \"deposit\",\n                \"amount\": 250,\n                \"timestamp\": \"2024-06-12T15:21:43.723Z\",\n                \"_id\": \"6669bd07c0b7cd234714b23e\"\n            },\n            {\n                \"type\": \"deposit\",\n                \"amount\": 300,\n                \"timestamp\": \"2024-06-14T08:36:54.089Z\",\n                \"_id\": \"666c0126c0b7cd234714b28c\"\n            }\n        ],\n        \"__v\": 4\n    }\n}"
+				}
+			]
 		}
 	]
 }
